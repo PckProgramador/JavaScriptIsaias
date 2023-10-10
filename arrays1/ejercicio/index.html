@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="script.js" defer>/*FORMA 3 Aquí los script cargan antes de que cargue el html
+    lo que puede dar lugar a errores por ir a destiempo
+    diferencias entre ATRIBUTO async y defer de la etiqueta script
+    async ejecuta a la vez el script y el html
+    defer ejecuta el script cuando termina de cargar el html*/</script> -->
+</head>
+<body>
+    <p>hola mundo</p>
+    <script>
+        //FORMA 1 Aqui creo algo en javascript
+        //Las buenas prácticas es no tener javascript dentro del html sino
+        //en un archivo aparte. ESTA NO SE DEBERIA USAR NUNCA
+        console.log("ejecucion al azar en el body");
+    </script>
+
+<!-- FORMA 2 Si pongo la etiqueta script al final se espera a que cargue todo el html 
+para empezar actuar para evitar que alguna etiqueta que se ha de transformar no exista -->
+<script src="ejercicio1.js">//Se puede poner en la línea antes de que cierre la etiqueta body</script>
+</body>
+</html>
