@@ -1,45 +1,77 @@
-import { users } from "./assets/modules.js"
+import { users } from "./assets/modules.js";
 
-// Insertar elemntos en el localStorage
-
-localStorage.setItem("Nombre","Patrick");
-
-//meter un objeto al localstorage
-const usuario={name:"Patrick",cp:12234};
-localStorage.setItem("user",JSON.stringify(usuario));
-
-alert(localStorage.getItem("Nombre"));
-
-//borrar una clave del localStorage
-localStorage.removeItem("Nombre");
-
-//borrar todo del localstorage
-localStorage.clear();
-
-localStorage.setItem("Mis users", JSON.stringify(users));
-
-const username= document.getElementById("username").value;//porque se guarda en properties
-const password=document.getElementById("password").value;
-
-const saludo=nombre= alert("hola mundo");
-
-
-document.getElementById("guardar").addEventListener("click",saludo("Patrick"));
-
-
+//Creamos una funcion que guarde en el localstorage la estructura  (TODOS) usuarios
 /**
- * Crear una pagina web que tenga la siguiente estructura:
- *  1. Header que ocupe todo el ancho de la pagina que este centrado que tenga el nombre del proyecto Usuario LocalStorage
- *  2. Tendremos dos secciones que parten la pagina por la mitad, 
- *  la primera mitad dispondremos de un formulario login que contendra los campos Username, password, boton de guardar
- *  3. La segunda mitad  nos mostrara los usuarios almacenados en un text area junto con el boton cargar.
- *  La funcionalidad será la siguiente:
- *      1.Cargaremos todos los usuarios JSONplaceholder/users a traves de una variable users a través de un import, luego a través de una 
- *      función guardará los usernames y el password de dichos usuarios dentro del LocalStorage.La password será encriptada antes de ser almacenada.
- *      2,A través del formulario introduciré un nombre y una contraseña. Si el nombre no está guardado en el localStorage,
- *      almacenaremos el nombre y contraseña en localStorage, si ya estaba dentro , mostramos una alerta de que ya estaba almacenado.
- *      3.A través del botón cargar sacaremos el nombre de usuario y la contraseña desencriptada de todos los usuarios almacenados en el localStorage.
- *      
- *          Nota: Para encriptar la contraseña utilizaremos btoa("cadena a encriptar") y atbo("cadena a desencriptar");
+ * @param {Array}structureData
+ * @return {Boolean}
  */
 
+//Declaracion de variables
+let myStructureUsers=[];
+function insertUsers (key,structureData) {
+  return localStorage.setItem(key,JSON.stringify(structureData));
+  //el JSON.stringify es para que la estructura de datos se guarde en un 
+  //formato que nos permite recuperar los datos mas tarde
+}
+
+insertUsers("users",users);
+//Funcion que cargue del localStorage la estructura cuyo nombre le pase como parametro
+/**
+ * 
+ * @param {String} estructura 
+ * @returns 
+ */
+function loadStructure(estructura){
+  return localStorage.getItem(estructura);
+}
+
+//Usamos la variable global declarada arriba para guardar el archivo.
+myStructureUsers=JSON.parse(loadStructure("users")); 
+
+// // getItem devuelve siempre un string, hay que hacerle un parse.
+// const structure2=loadStructure("users");
+// console.log(typeof(myStructureUsers));
+// console.log(typeof(structure2));
+
+//Guardar en una estructura de datos el username y el password (codificado) de todos los usuarios de mi estructura
+/**
+ * 
+ * @param {String} key 
+ * @param {Array} structureData 
+ */
+function saveStructureUsernamePassword(key,structureData){
+  let tmpArray=[];
+  structureData.map((user) =>tmpArray.push( { [ user.login.username ] : btoa(user.login.password) } ) );
+  localStorage.setItem(key,JSON.stringify(tmpArray));
+}
+saveStructureUsernamePassword("hola",myStructureUsers);
+
+// Guardar de los nuevos usuarios que vaya a introducir usuario y contraseña(codificada) SIN REPETIR el username y despues se vuelca al localStorage
+/**
+ * 
+ * @param {String} key 
+ * @param {String} username 
+ * @param {String} password 
+ */
+function saveUserPasswordLocalStorage(key,username,password){
+  const tmpArray=JSON.parse(localStorage.getItem(key));
+  const encontrado=false;
+  tmpArray.map(objeto => objeto.hasOwnProperty(username)?encontrado=true:false);
+
+  !encontrado?tmpArray.push( {[username] : btoa(password)} ):alert("el usuario ya existe");
+
+  localStorage.setItem(key,JSON.stringify(tmpArray));
+
+}
+
+function save(){
+  //capturar lo que he escrito en el formulario y guardarlo en variables
+  //llamar a mi funcion que guardaba en la key el username y el password
+  //si lo guarda alert indicando que ha sido guardado y borro el formulario.
+}
+//Captura de eventos en un formulario
+
+
+document.getElementById("guardar").addEventListener("click",save);
+//hay dos funciones de llamar a la funcion no puedes poner save() porque se ejecutaria antes de clicar si 
+//fuese una arrow function si podria "click"=> save()
