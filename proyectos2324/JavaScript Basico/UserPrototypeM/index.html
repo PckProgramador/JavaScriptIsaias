@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Uso de prototipos</title>
+  </head>
+  <body>
+    <header class="bg-primary text-center py-2">
+      <div class="container">
+        <h1 class="text-light">Uso de prototipos JavaScript</h1>
+      </div>
+    </header>
+    <div class="container mt-2">
+    <div class="row">
+      <div class="col-md-7 mt-4">
+        <h3 class="text-center">Usuario y Dni Prototype</h3>
+        <form action="" class="userPrototype" id="formularioUsuarios">
+          <div class="mb-3">
+            <label for="username" class="form-label">Nombre de usuario</label>
+            <input type="text" class="form-control" id="username">
+          </div>
+          <div class="mb-3">
+            <label for="edad" class="form-label">Edad</label>
+            <input type="number" class="form-control" id="edad">
+          </div>
+          <div class="mb-3">
+            <label for="dni" class="form-label">Dni</label>
+            <input type="text" class="form-control" id="dni">
+          </div>
+          <div class="d-flex justify-content-end">
+            <button class="btn-primary" id="insertarUsuario">InsertarUsuario</button>
+          </div>
+        </form>
+        <div class="alert alert-success mt-3" id="mensajeExito" style="display: none">
+        </div>
+        <div class="alert alert-success mt-3" id="mensajeError" style="display: none">
+        </div>
+      </div>
+      <div class="col-md-5 mt-4">
+        <h3 class="text-center">Copia de seguridad</h3>
+        <div class="d-flex justify-content-end">
+          <button class="btn-primary" id="insertarCopia">Copia de seguridad</button>
+        </div>
+      </div>
+    </div>  
+    </div>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>
